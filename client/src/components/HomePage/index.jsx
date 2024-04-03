@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const TaskManager = () => {
   const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState('');
-
-  // const apiUrl = 'http://localhost:3000/api/v1/tasks';
-  const apiUrl = 'http://cs.wheatoncollege.edu:3000/api/v1/tasks';
 
   useEffect(() => {
     fetchTasks();
@@ -14,7 +12,7 @@ const TaskManager = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch(apiUrl);
+      const response = await fetch(`${apiUrl}/tasks`);
       const data = await response.json();
       setTasks(data.tasks);
     } catch (error) {
@@ -24,7 +22,7 @@ const TaskManager = () => {
 
   const createTask = async () => {
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +40,7 @@ const TaskManager = () => {
 
   const updateTask = async (taskId, updatedName) => {
     try {
-      const response = await fetch(`${apiUrl}/${taskId}`, {
+      const response = await fetch(`${apiUrl}/tasks/${taskId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +57,7 @@ const TaskManager = () => {
 
   const deleteTask = async (taskId) => {
     try {
-      const response = await fetch(`${apiUrl}/${taskId}`, {
+      const response = await fetch(`${apiUrl}/tasks/${taskId}`, {
         method: 'DELETE',
       });
 

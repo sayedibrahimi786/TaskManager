@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Login = () => {
 	const [userInfo, setUserInfo] = useState({ email: "", password: "" });
@@ -13,9 +14,8 @@ const Login = () => {
 	const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // const url = "http://localhost:3000/api/v1/login";
-			const url = "http://cs.wheatoncollege.edu:3000/api/v1/login";
-            const response = await fetch(url, {
+            
+            const response = await fetch(`${apiUrl}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

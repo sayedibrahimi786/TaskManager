@@ -1,5 +1,6 @@
 // import styles from "./styles.module.css";
 import { useEffect } from "react";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 // const handleLogout = () => {
 // 	localStorage.removeItem("token");
@@ -14,7 +15,7 @@ const RedirectToServerHome = () => {
 			if (user) {
 			//await fetch("http://localhost:3000");
 			// window.location.href = "http://localhost:3000";
-			window.location.href = "http://cs.wheatoncollege.edu:3000";
+			window.location.href = apiUrl;
 			}
 		} catch (error) {
 			console.error("Error:", error);
