@@ -1,5 +1,24 @@
 const User = require("../models/users");
 
+const getUser = async (req, res) => {
+  try {
+    // Retrieve the user ID
+    const userId = req.user._id;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    // If the user is found, send their details as a response
+    res.status(200).send(user);
+  } catch (error) {
+    // Handle any errors
+    console.error("Error fetching user:", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+};
+
 const createUser = async (req, res) => {
   try {
     // Check if user with the given email already exists
@@ -22,4 +41,7 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = createUser;
+module.exports = {
+  createUser,
+  getUser,
+};

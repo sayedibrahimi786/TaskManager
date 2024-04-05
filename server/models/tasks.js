@@ -13,6 +13,9 @@ const TaskSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  createdBy: {
+    type: String,
+  },
 });
 
 // Task is the model name
